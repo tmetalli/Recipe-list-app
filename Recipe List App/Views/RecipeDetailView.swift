@@ -19,7 +19,16 @@ struct RecipeDetailView: View {
             VStack(alignment: .leading) {
 
                 // MARK: Recipe image
-                Image(recipe.image).resizable().scaledToFill()
+                Image(recipe.image)
+                    .resizable()
+                    .scaledToFill()
+                
+                // MARK: Recipe title
+                Text(recipe.name)
+                    .bold()
+                    .padding(.top, 20)
+                    .padding(.leading)
+                    .font(.largeTitle)
                 
                 // MARK: Serving Size Picker
                 VStack (alignment: .leading) {
@@ -44,7 +53,7 @@ struct RecipeDetailView: View {
                         .padding([.bottom,.top], 5)
                     
                     ForEach (recipe.ingredients) { item in
-                        Text("⋅ " + RecipeModel.getPortion(ingredient: item, recipeServings: recipe.servings, targetServings: selectedServingSize) + " " + item.name)
+                        Text("⋅ " + RecipeModel.getPortion(ingredient: item, recipeServings: recipe.servings, targetServings: selectedServingSize) + " " + item.name.lowercased())
                             .padding(.bottom, 0.1)
                     }
                 }
@@ -65,7 +74,6 @@ struct RecipeDetailView: View {
                 .padding(.horizontal)
             }
         }
-        .navigationBarTitle(recipe.name)
     }
 }
 

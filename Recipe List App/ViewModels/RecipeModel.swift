@@ -59,7 +59,30 @@ class RecipeModel: ObservableObject {
             }
         }
         
-        return String(targetServings)
+        if var unit = ingredient.unit {
+            
+            // If we need to pluralise
+            if wholePortions > 1 {
+            
+                // Calculate appropriate suffix
+                if unit.suffix(2) == "ch" {
+                    unit += "es"
+                }
+                else if unit.suffix(1) == "f" {
+                    unit = String(unit.dropLast())
+                    unit += "ves"
+                }
+                else {
+                    unit += "s"
+                }
+            }
+            
+            portion += ingredient.num == nil && ingredient.denom == nil ? "" : " "
+            
+            return portion + unit
+        }
+        
+        return portion
         
     }
 

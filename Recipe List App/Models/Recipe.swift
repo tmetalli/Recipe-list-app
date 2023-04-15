@@ -30,6 +30,6 @@ class Ingredient: Identifiable, Decodable {
     var name:String
     var num:Int?
     var denom:Int?
-    var unti:String?
+    var unit:String?
     
 }
